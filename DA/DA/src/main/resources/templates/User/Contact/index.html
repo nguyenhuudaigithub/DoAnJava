@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <!-- Title  -->
+    <title>Linh Kiện 24/7</title>
+    <th:block th:replace="user/layout :: link-css"></th:block>
+    <script src="/ckfinder/static/ckfinder.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.ckeditor.com/4.21.0/standard/ckeditor.js"></script>
+</head>
+<body>
+<th:block th:replace="user/layout :: header"></th:block>
+<div class="checkout_area section-padding-80">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="checkout_details_area mt-50 clearfix">
+                    <div class="cart-page-heading mb-30">
+                        <h5>Gửi Hỗ Trợ/ Báo Cáo</h5>
+                    </div>
+                    <form action="/sendEmail" method="post">
+                        <div class="row">
+                            <div class="col-md-12 mb-3">
+                                <label for="first_name">Họ và tên: <span>*</span></label>
+                                <input type="text" name="hoTen" class="form-control" id="first_name" value="" required=""><br>
+                            </div>
+                            <div class="col-12 mb-3">
+                                <label for="phone_number">Số Điện Thoại:<span>*</span></label>
+                                <input type="number" name="dienThoai" class="form-control" id="phone_number" min="0" value="">
+                            </div>
+                            <div class="col-12 mb-4">
+                                <label for="email_address">Email: <span>*</span></label>
+                                <input type="email" name="email" class="form-control" id="email_address" value="">
+                            </div>
+                            <div class="col-12 mb-3">
+                                <label for="company">Tiêu Đề:</label>
+                                <input type="text" name="tieuDe" class="form-control" id="company" value="">
+                            </div>
+                            <div class="col-12 mb-3">
+                                <label for="country">Báo cáo/ Hỗ Trợ <span>*</span></label>
+                                <select class="w-100" id="country" style="display: none;" name="deTai">
+                                    <option value="HoTro">Hỗ trợ sự cố xảy ra.</option>
+                                    <option value="BaoCao">Báo cáo dịch vụ.</option>
+                                    <option value="LoiWeb">Thống báo lỗi về website.</option>
+                                    <option value="Khac">Khác.</option>
+                                </select>
+                                <div class="nice-select w-100" tabindex="0">
+                                    <span class="current">BÁO CÁO/ HỖ TRỢ</span>
+                                    <ul class="list">
+                                        <li data-value="HoTro" class="option selected">Hỗ trợ sự cố xảy ra.</li>
+                                        <li data-value="BaoCao" class="option">Báo cáo dịch vụ.</li>
+                                        <li data-value="LoiWeb" class="option">Thống báo lỗi về website.</li>
+                                        <li data-value="Khac" class="option">Khác.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-12 mb-3">
+                                <label for="txtDetail">Nội Dung Góp Ý: <span>*</span></label>
+                                <textarea id="txtDetail" name="noiDungGopY" class="form-control mb-3"></textarea>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn essence-btn">Gửi</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<th:block th:replace="user/layout :: footer"></th:block>
+<th:block th:replace="user/layout :: java-css"></th:block>
+<script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
+<script>
+    $(document).ready(function() {
+        CKEDITOR.replace('txtDetail');
+    });
+    function BrowseServer(field) {
+        CKFinder.popup({
+            chooseFiles: true,
+            width: 800,
+            height: 600,
+            onInit: function(finder) {
+                finder.on('files:choose', function(evt) {
+                    var file = evt.data.files.first();
+                    var url = file.getUrl();
+                    document.getElementById(field).value = url;
+                });
+            }
+        });
+    }
+</script>
+</body>
+</html>

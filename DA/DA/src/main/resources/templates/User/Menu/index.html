@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <!-- Title  -->
+    <title>Linh Kiện 24/7</title>
+    <th:block th:replace="user/layout :: link-css"></th:block>
+</head>
+<body>
+<th:block th:replace="user/layout :: header"></th:block>
+<div class="breadcumb_area bg-img" style="background-image: url(../../../../../userfiles/files/CSS/User/img/bg-img/breadcumb.jpg);">
+    <div class="container h-100">
+        <div class="row h-100 align-items-center">
+            <div class="col-12">
+                <div class="page-title text-center">
+                    <h2>Linh Kiện 24/7</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<section class="shop_grid_area section-padding-80">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-md-4 col-lg-3">
+                <div class="shop_sidebar_area">
+
+                    <!-- ##### Single Widget ##### -->
+                    <div class="widget catagory mb-50">
+                        <!-- Widget Title -->
+                        <h6 class="widget-title mb-30">Danh Mục Sản Phẩm</h6>
+
+                        <!--  Catagories  -->
+                        <div class="catagories-menu">
+                            <ul id="menu-content2" class="menu-content collapse show">
+                                <!-- Single Item -->
+                                <li data-toggle="collapse" data-target="#clothing">
+                                    <a href="#">Danh mục sản phẩm</a>
+                                    <ul class="sub-menu collapse show" id="clothing">
+                                        <li><a href="/menu">Tất cả</a></li>
+                                        <li th:each="category : ${categories}">
+                                            <a th:href="@{/menu(categoryId=${category.id})}" th:text="${category.name}"></a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-8 col-lg-9">
+                <div class="shop_grid_product_area">
+                    <div class="row">
+                        <!-- Single Product -->
+                        <div class="col-12 col-sm-6 col-lg-4" th:each="product : ${products}">
+                            <div class="single-product-wrapper">
+                                <!-- Product Image -->
+                                <div class="product-img" >
+                                    <img th:src="${product.image}" alt="">
+                                    <!-- Favourite -->
+                                    <div class="product-favourite">
+                                        <a href="#" class="favme fa fa-heart"></a>
+                                    </div>
+                                </div>
+                                <!-- Product Description -->
+                                <div class="product-description">
+                                    <span th:text="${product.category.name}"></span>
+                                    <a th:href="@{/menu/{id}(id=${product.id})}">
+                                        <h6 th:text="${product.name} " ></h6>
+                                    </a>
+                                    <p class="product-price">
+                                        <span th:unless="${product.price_sale == null}" class="old-price" th:text="${product.price}+VNĐ"></span>
+                                        <p th:if="${product.price_sale == null}" th:text="${product.price}+VNĐ"></p>
+                                        <p th:if="${product.price_sale != null}" th:text="${product.price_sale}+VNĐ"></p>
+                                    </p>
+                                    <!-- Hover Content -->
+                                    <div class="hover-content">
+                                        <!-- Add to Cart -->
+                                        <form th:action="@{/add-to-cart}" method="post" class="d-inline">
+                                            <div class="add-to-cart-btn">
+                                                <input type="hidden" name="id" th:value="${product.getId()}">
+                                                <input type="hidden" name="name" th:value="${product.getName()}">
+                                                <input type="hidden" name="price" th:value="${product.getPrice()}">
+                                                <button type="submit" class="btn essence-btn" onclick="return confirm('Bạn muốn thêm sản phẩm vào giỏ hàng ?')">Thêm vào giỏ hàng</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<th:block th:replace="user/layout :: footer"></th:block>
+<th:block th:replace="user/layout :: java-css"></th:block>
+</body>
+</html>

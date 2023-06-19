@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" class="light-style layout-menu-fixed" dir="ltr" data-theme="theme-default" data-assets-path="../../../../../../userfiles/files/CSS/Admin/assets/" data-template="vertical-menu-template-free" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport"content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
+    <title>Đăng Nhập</title>
+    <th:block th:replace="login/layout :: link-css"></th:block>
+</head>
+<body>
+<div class="container-xxl">
+    <div class="authentication-wrapper authentication-basic container-p-y">
+        <div class="authentication-inner">
+            <!-- Register -->
+            <div class="card">
+                <div class="card-body">
+                    <!-- Logo -->
+                    <div class="app-brand justify-content-center">
+                        <a href="/" class="app-brand-link gap-2">
+                          <span class="app-brand-logo demo"></span>
+                            <span class=" demo text-body fw-bolder" style="font-size: 15px;">Linh Kiện 24/7</span>
+                        </a>
+                    </div>
+                    <!-- /Logo -->
+                    <h4 style="text-align: center;font-size: 38px;">Đăng Nhập</h4>
+                    <form th:action="@{/login}" method="post">
+                        <fieldset>
+                            <div th:if="${param.error}" class="alert alert-danger">
+                                Tài khoản hoặc mật khẩu không hợp lệ.
+                            </div>
+                            <div th:if="${param.logout}" class="alert alert-success">
+                               Bạn đã đăng xuất.
+                            </div>
+                            <div class="mb-3">
+                                <label for="username" class="form-label">Tài Khoản: </label>
+                                <input type="text" required class="form-control" id="username" name="username">
+                            </div>
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Mật Khẩu: </label>
+                                <input type="password" required class="form-control" id="password" name="password">
+                            </div>
+                            <div class="mb-3">
+                                <input type="checkbox" class="remember-me" id="remember-me">
+                                <label for="remember-me">Remember me</label>
+                            </div>
+                            <div class="d-grid gap-2 form-action">
+                                <button type="submit" class="btn btn-primary">Login</button>
+                            </div>
+                        </fieldset>
+                    </form>
+                    <div style="margin-top:20px;margin-bottom:20px">
+                        <a href="/oauth2/authorization/google"
+                           class="btn btn-outline-danger btn-floating m-1 "
+                           role="button" >
+                            Đăng nhập bằng Google
+                        </a>
+                    </div>
+                    <p class="text-center">
+                        <span>Bạn chưa có tài khoản?</span>
+                        <a href="/register">
+                            <span>Đăng ký ngay.</span>
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<th:block th:replace="login/layout :: java-css"></th:block>
+</body>
+</html>
+
+

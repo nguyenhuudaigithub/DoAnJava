@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  <!-- Title  -->
+  <title>Linh Kiện 24/7</title>
+  <th:block th:replace="user/layout :: link-css"></th:block>
+</head>
+<body>
+<th:block th:replace="user/layout :: header"></th:block>
+<div class="breadcumb_area breadcumb-style-two bg-img" style="background-image: url(./../../../../userfiles/files/CSS/User/img/bg-img/breadcumb2.jpg);">
+  <div class="container h-100">
+    <div class="row h-100 align-items-center">
+      <div class="col-12">
+        <div class="page-title text-center">
+          <h2>Tin Mới Nhất</h2>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="blog-wrapper section-padding-80">
+  <div class="container">
+    <div class="row">
+      <!-- Single Blog Area -->
+      <div class="col-12 col-lg-6" th:each="post : ${posts}">
+        <div class="single-blog-area mb-50">
+          <img th:src="${post.image}" alt="">
+          <!-- Post Title -->
+          <div class="post-title">
+            <a href="#" th:text="${post.name}"></a>
+          </div>
+          <!-- Hover Content -->
+          <div class="hover-content">
+            <!-- Post Title -->
+            <div class="hover-post-title">
+              <a href="#" th:text="${post.name}"></a>
+            </div>
+            <p th:text="${post.description}"></p>
+            <a href="#" th:href="@{/posts/{id}(id=${post.id})}">Đọc Thêm<i class="fa fa-angle-right"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<th:block th:replace="user/layout :: footer"></th:block>
+<th:block th:replace="user/layout :: java-css"></th:block>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  <!-- Title  -->
+  <title>Linh Kiện 24/7</title>
+  <th:block th:replace="user/layout :: link-css"></th:block>
+</head>
+<body>
+<th:block th:replace="user/layout :: header"></th:block>
+<div style="margin-bottom: 22%">
+  <div class="container" th:if="${not #lists.isEmpty(cart.cartItems)}">
+    <table class="table">
+      <thead>
+      <tr>
+        <th scope="col">STT</th>
+        <th scope="col">Tên Sản Phẩm</th>
+        <th scope="col">Số Lượng</th>
+        <th scope="col">Giá</th>
+        <th scope="col">Tổng Giá</th>
+        <th scope="col"></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="item : ${cart.cartItems}">
+        <td th:text="${item.getProductId()}"></td>
+        <td th:text="${item.getProductName()}"></td>
+        <td>
+          <label>
+            <input type="number" min="1"
+                   th:value="${item.getQuantity()}"
+                   th:attr="data-id=${item.getProductId()}"
+                   class="form-control quantity">
+          </label>
+        </td>
+        <td th:text="${item.getPrice()}"></td>
+        <td th:text="${item.getPrice() * item.getQuantity()}"></td>
+        <td>
+          <a class="btn btn-danger"
+             th:href="@{/cart/removeFromCart/{id}(id=${item.getProductId()})}">
+            Xóa
+          </a>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+    <div class="row">
+      <div class="col-md-12">
+        <h3>Tổng giá: <span th:text="${totalPrice}"></span></h3>
+      </div>
+      <div class="col-md-12 text-center">
+        <a class="btn btn-success"
+           th:href="@{/cart/checkout}">Thanh Toán</a>
+        <a class="btn btn-danger"
+           th:href="@{/cart/clearCart}">Xóa Tất Cả</a>
+      </div>
+    </div>
+  </div>
+  <div class="container" th:if="${#lists.isEmpty(cart.cartItems)}">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 offset-md-3 text-center">
+          <h3 class="mt-5">Giỏ hàng của bạn đang trống.</h3>
+          <p class="lead">Làm ơn thêm vào giỏ hàng.</p>
+          <a class="btn btn-primary" href="/">Quay Lại Danh Sách Sản Phẩm</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<th:block th:replace="user/layout :: footer"></th:block>
+<th:block th:replace="user/layout :: java-css"></th:block>
+<script th:src="@{../../../../../userfiles/files/CSS/User/js/cart.js}"></script>
+</body>
+</html>

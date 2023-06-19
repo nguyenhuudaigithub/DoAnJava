@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" class="light-style layout-menu-fixed" dir="ltr" data-theme="theme-default" data-assets-path="../../../../../../userfiles/files/CSS/Admin/assets/" data-template="vertical-menu-template-free" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport"content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
+  <title>Thêm Danh Mục Sản Phẩm</title>
+  <th:block th:replace="admin/layout :: link-css"></th:block>
+</head>
+<body>
+<th:block th:replace="admin/layout :: header"></th:block>
+<div class="layout-page">
+  <!-- Content wrapper -->
+  <div class="content-wrapper">
+    <!-- Content -->
+    <div class="container-xxl flex-grow-1 container-p-y">
+      <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Sản Phẩm /</span> Thêm Danh Mục Sản Phẩm</h4>
+      <!-- Basic Bootstrap Table -->
+      <div class="card mb-4">
+        <h5 class="card-header">Thêm Danh Mục Sản Phẩm</h5>
+        <div class="card-body">
+          <form th:action="@{/admin/categories/add}" method="post" th:object="${category}">
+            <div>
+              <label for="categoryName" class="form-label">Tên Danh Mục</label>
+              <input type="text" class="form-control" id="categoryName" placeholder="Module ứng dụng" aria-describedby="categoryNameHelp" th:field="*{name}" required>
+            </div>
+            <div>
+              <label for="categoryDetail" class="form-label">Chi Tiết Danh Mục</label>
+              <input type="text" class="form-control" id="categoryDetail" placeholder="Module tăng áp, module hạ áp,..." aria-describedby="categoryDetailHelp" th:field="*{detail}" required>
+            </div>
+            <div class="mb-3">
+              <label for="categoryImage" class="form-label">Ảnh đại diện</label>
+              <div class="input-group">
+                <input class="form-control" type="text" placeholder="http://localhost:8080/userfiles/images/Module/OIP%20(10).jpg" id="categoryImage" th:field="*{image}">
+                <div class="input-group-append">
+                  <input class="btn btn-outline-secondary" type="button" value="Tải ảnh" onclick="BrowseServer('categoryImage');">
+                </div>
+              </div>
+            </div>
+            <button type="submit" class="btn rounded-pill btn-success">Thêm Mới</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<th:block th:replace="admin/layout :: footer"></th:block>
+<th:block th:replace="admin/layout :: java-css"></th:block>
+<script>
+      function BrowseServer(field) {
+        CKFinder.popup({
+          chooseFiles: true,
+          width: 800,
+          height: 600,
+          onInit: function(finder) {
+            finder.on('files:choose', function(evt) {
+              var file = evt.data.files.first();
+              var url = file.getUrl();
+              document.getElementById(field).value = url;
+            });
+          }
+        });
+      }
+</script>
+</body>
+</html>

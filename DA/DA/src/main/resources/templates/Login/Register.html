@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" class="light-style layout-menu-fixed" dir="ltr" data-theme="theme-default" data-assets-path="../../../../../../userfiles/files/CSS/Admin/assets/" data-template="vertical-menu-template-free" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport"content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
+    <title>Đăng Ký</title>
+    <th:block th:replace="login/layout :: link-css"></th:block>
+</head>
+<body>
+<div class="container-xxl">
+    <div class="authentication-wrapper authentication-basic container-p-y">
+        <div class="authentication-inner">
+            <!-- Register -->
+            <div class="card">
+                <div class="card-body">
+                    <!-- Logo -->
+                    <div class="app-brand justify-content-center">
+                        <a href="/" class="app-brand-link gap-2">
+                            <span class="app-brand-logo demo"></span>
+                            <span class=" demo text-body fw-bolder" style="font-size: 15px;">Linh Kiện 24/7</span>
+                        </a>
+                    </div>
+                    <!-- /Logo -->
+                    <h4 style="text-align: center;font-size: 38px;">Đăng Ký</h4>
+                    <form id="formAuthentication" class="mb-3" th:action="@{/register}" th:object="${user}" method="post">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Tên Người Dùng</label>
+                            <input type="text" class="form-control" id="name" name="username" th:field="*{name}" placeholder="Nhập tài khoản" autofocus=""required>
+                            <span class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Tài Khoản</label>
+                            <input type="text" class="form-control" id="username" name="username" placeholder="Nhập tài khoản" autofocus="" th:field="*{username}"required>
+                            <span class="text-danger" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="text" class="form-control" id="email" name="email" placeholder="Nhập Email" th:field="*{email}" required pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" title="Email không hợp lệ">
+                            <span class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label for="address" class="form-label">Địa chỉ</label>
+                            <input type="text" class="form-control" id="address" th:field="*{address}" placeholder="Nhập địa chỉ" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="phoneNumber" class="form-label">Số điện thoại</label>
+                            <input type="text" class="form-control" id="phoneNumber" th:field="*{phoneNumber}" placeholder="Nhập số điện thoại" required pattern="0\d{9}" title="Số điện thoại không hợp lệ">
+                        </div>
+                        <div class="mb-3 form-password-toggle">
+                            <label class="form-label" for="password">Mật Khẩu</label>
+                            <div class="input-group input-group-merge">
+                                <input type="password" id="password" class="form-control" name="password" placeholder="············" aria-describedby="password" th:field="*{password}"required>
+                            </div>
+                            <span class="text-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+                        </div>
+
+
+                        <div class="mb-3">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="terms-conditions" name="terms">
+                                <label class="form-check-label" for="terms-conditions">Tôi đồng ý với <a href="javascript:void(0);">chính sách bảo mật</a>
+                                </label>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary d-grid w-100">Đăng Ký</button>
+                    </form>
+                    <p class="text-center">
+                        <span>Tôi đã có tài khoản?</span>
+                        <a href="auth-register-basic.html">
+                            <span>Đăng nhập ngay.</span>
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<th:block th:replace="login/layout :: java-css"></th:block>
+</body>
+</html>
+
+

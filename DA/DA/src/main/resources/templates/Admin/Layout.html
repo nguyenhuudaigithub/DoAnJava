@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en" class="light-style layout-menu-fixed" dir="ltr" data-theme="theme-default" data-assets-path="../../../../../userfiles/files/CSS/Admin/assets/" data-template="vertical-menu-template-free" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport"content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
+
+    <title>--- Trang Admin ---</title>
+    <th:block th:fragment="link-css">
+      <meta name="description" content="" />
+
+      <!-- Favicon -->
+      <link rel="icon" type="image/x-icon" href="../../../../../userfiles/files/CSS/Admin/assets/img/favicon/favicon.ico" />
+
+      <!-- Fonts -->
+      <link rel="preconnect" href="https://fonts.googleapis.com" />
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+      <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet"/>
+
+      <!-- Icons. Uncomment required icon fonts -->
+      <link rel="stylesheet" href="../../../../../userfiles/files/CSS/Admin/assets/vendor/fonts/boxicons.css" />
+  
+
+      <!-- Core CSS -->
+      <link rel="stylesheet" href="../../../../../userfiles/files/CSS/Admin/assets/vendor/css/core.css" class="template-customizer-core-css" />
+      <link rel="stylesheet" href="../../../../../userfiles/files/CSS/Admin/assets/vendor/css/theme-default.css" class="template-customizer-theme-css" />
+      <link rel="stylesheet" href="../../../../../userfiles/files/CSS/Admin/assets/css/demo.css" />
+
+      <!-- Vendors CSS -->
+      <link rel="stylesheet" href="../../../../../userfiles/files/CSS/Admin/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+
+      <link rel="stylesheet" href="../../../../../userfiles/files/CSS/Admin/assets/vendor/libs/apex-charts/apex-charts.css" />
+
+      <!-- Page CSS -->
+
+      <!-- Helpers -->
+      <script src="../../../../../userfiles/files/CSS/Admin/assets/vendor/js/helpers.js"></script>
+
+      <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
+      <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
+      <script src="../../../../../userfiles/files/CSS/Admin/assets/js/config.js"></script>
+      <script src="/ckfinder/static/ckfinder.js"></script>
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+      <script src="https://cdn.ckeditor.com/4.21.0/standard/ckeditor.js"></script>
+    </th:block>
+  </head>
+  <body>
+    <!-- Layout wrapper -->
+    <div class="layout-wrapper layout-content-navbar">
+        <div class="layout-container">
+            <!--  Menu -->
+            <header th:fragment="header">
+              <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+                <div class="app-brand demo">
+                  <a href="http://localhost:8080/admin" class="app-brand-link">
+                    <span class="app-brand-text demo menu-text fw-bolder ms-2">ADMIN</span>
+                  </a>
+            
+                  <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
+                    <i class="bx bx-chevron-left bx-sm align-middle"></i>
+                  </a>
+                </div>
+            
+                <div class="menu-inner-shadow"></div>
+            
+                <ul class="menu-inner py-1">
+                  <!-- Dashboard -->
+                  <li class="menu-item">
+                    <a href="http://localhost:8080/admin" class="menu-link">
+                      <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                      <div data-i18n="Analytics">Trang Chủ</div>
+                    </a>
+                  </li>
+                  <!-- Tin Tức -->
+                  <li class="menu-item">
+                    <a href="http://localhost:8080/admin/news" class="menu-link">
+                      <i class="menu-icon tf-icons bx bx-collection"></i>
+                      <div data-i18n="Analytics">Tin Tức</div>
+                    </a>
+                  </li>
+                  <!-- Bài Viết -->
+                  <li class="menu-item">
+                    <a href="http://localhost:8080/admin/posts" class="menu-link">
+                      <i class="menu-icon tf-icons bx bx-copy"></i>
+                      <div data-i18n="Analytics">Bài Viết</div>
+                    </a>
+                  </li>
+                  <!-- Sản Phẩm -->
+                  <li class="menu-item">
+                    <a href="javascript:void(0);" class="menu-link menu-toggle">
+                      <i class="menu-icon tf-icons bx bx-layout"></i>
+                      <div data-i18n="Layouts">Sản Phẩm</div>
+                    </a>           
+                    <ul class="menu-sub">
+                      <li class="menu-item">
+                        <a href="http://localhost:8080/admin/categories" class="menu-link">
+                          <div data-i18n="Without menu">Danh Mục</div>
+                        </a>
+                      </li>
+                      <li class="menu-item">
+                        <a href="http://localhost:8080/admin/products" class="menu-link">
+                          <div data-i18n="Without navbar">Sản Phẩm</div>
+                        </a>
+                      </li>
+                    </ul>
+                  </li>
+            
+                  <li class="menu-header small text-uppercase">
+                    <span class="menu-header-text">Người Dùng</span>
+                  </li>
+                  <li class="menu-item">
+                    <a href="javascript:void(0);" class="menu-link menu-toggle">
+                      <i class="menu-icon tf-icons bx bx-dock-top"></i>
+                      <div data-i18n="Account Settings">Tài Khoản</div>
+                    </a>
+                    <ul class="menu-sub">
+                      <li class="menu-item">
+                        <a href="/admin/list-user" class="menu-link">
+                          <div data-i18n="Account">Danh Sách Tài Khoản</div>
+                        </a>
+                      </li>
+                    </ul>
+                  </li>
+                  <!-- Components -->
+                  <li class="menu-header small text-uppercase"><span class="menu-header-text">Dịch Vụ</span></li>
+                  <!-- Cards -->
+                  <li class="menu-item">
+                    <a href="/admin/listEmail" class="menu-link">
+                      <i class="menu-icon tf-icons bx bx-collection"></i>
+                      <div data-i18n="Basic">Email Đăng Ký Sự Kiện</div>
+                    </a>
+                  </li>
+                  <!-- User interface -->
+                  <li class="menu-item">
+                    <a href="#" class="menu-link">
+                      <i class="menu-icon tf-icons bx bx-collection"></i>
+                      <div data-i18n="User interface">Quảng Cáo</div>
+                    </a>
+                  </li>
+                  <!-- Forms & Tables -->
+                  <li class="menu-header small text-uppercase"><span class="menu-header-text">Quản Lý Đơn Hàng</span></li>
+                  <!-- Forms -->
+                  <li class="menu-item">
+                    <a href="#" class="menu-link">
+                      <i class="menu-icon tf-icons bx bx-collection"></i>
+                      <div data-i18n="Form Elements">Danh Sách Đơn Hàng</div>
+                    </a>
+                  </li>
+                  <li class="menu-item">
+                    <a href="#" class="menu-link">
+                      <i class="menu-icon tf-icons bx bx-collection"></i>
+                      <div data-i18n="Form Layouts">Doanh Thu</div>
+                    </a>
+                  </li>
+                </ul>
+              </aside> 
+            </header>           
+            <!-- / Menu -->
+            <div class="layout-page">
+                <div th:insert="~{::${content}}">
+                  <!-- Noi dung trang con -->
+
+                </div>
+            </div>
+            <footer th:fragment="footer"></footer>
+          <!-- Content wrapper -->
+          </div>
+          <!-- / Layout page -->
+        </div>
+
+      <!-- Overlay -->
+      <div class="layout-overlay layout-menu-toggle"></div>
+    </div>
+    <th:block th:fragment="java-css">
+    <!-- / Layout wrapper -->
+    <!-- Core JS -->
+    <!-- build:js assets/vendor/js/core.js -->
+    <script src="../../../../../userfiles/files/CSS/Admin/assets/vendor/libs/jquery/jquery.js"></script>
+    <script src="../../../../../userfiles/files/CSS/Admin/assets/vendor/libs/popper/popper.js"></script>
+    <script src="../../../../../userfiles/files/CSS/Admin/assets/vendor/js/bootstrap.js"></script>
+    <script src="../../../../../userfiles/files/CSS/Admin/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+
+    <script src="../../../../../userfiles/files/CSS/Admin/assets/vendor/js/menu.js"></script>
+    <!-- endbuild -->
+
+    <!-- Vendors JS -->
+    <script src="../../../../../userfiles/files/CSS/Admin/assets/vendor/libs/apex-charts/apexcharts.js"></script>
+
+    <!-- Main JS -->
+    <script src="../../../../../userfiles/files/CSS/Admin/assets/js/main.js"></script>
+
+    <!-- Page JS -->
+    <script src="../../../../../userfiles/files/CSS/Admin/assets/js/dashboards-analytics.js"></script>
+
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    </th:block>
+  </body>
+</html>

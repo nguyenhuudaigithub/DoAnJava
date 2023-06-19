@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <!-- Title  -->
+    <title>Linh Kiện 24/7</title>
+    <th:block th:replace="user/layout :: link-css"></th:block>
+</head>
+<body>
+<th:block th:replace="user/layout :: header"></th:block>
+<section class="welcome_area bg-img background-overlay" style="background-image: url(../../../../../userfiles/images/bg.jpg);">
+    <div class="container h-100">
+        <div class="row h-100 align-items-center">
+            <div class="col-12">
+                <div class="hero-content">
+                    <h6>Linh Kiện 24/7</h6>
+                    <h2>Phát Triển Vì Cộng Đồng</h2>
+                    <a href="/posts" class="btn essence-btn">Khám Phá Thêm</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--Danh Mục Sản Phẩm-->
+<div class="top_catagory_area section-padding-80 clearfix">
+    <div class="container">
+        <div class="row justify-content-center">
+            <!-- Single Catagory -->
+            <div class="col-12 col-sm-6 col-md-4" th:each="category : ${categories}">
+                <div class="single_catagory_area d-flex align-items-center justify-content-center bg-img" th:style="'background-image: url(' + ${category.image} + ');'">
+                    <div class="catagory-content">
+                        <a th:href="@{/menu(categoryId=${category.id})}" th:text="${category.name}"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Bài sale-->
+<div class="cta-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="cta-content bg-img background-overlay" th:each="post : ${posts}" th:style="'background-image: url(\'' + ${post.image} + '\');'">
+                    <div class="h-100 d-flex align-items-center justify-content-end">
+                        <div class="cta--text">
+                            <h2 th:text="${post.name}"></h2>
+                            <a href="#" class="btn essence-btn" th:href="@{/posts/{id}(id=${post.id})}">Đọc Thêm</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Sản Phẩm-->
+<section class="new_arrivals_area section-padding-80 clearfix">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="section-heading text-center">
+                    <h2>Sản Phẩm Nổi Bật</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="popular-products-slides owl-carousel owl-theme">
+                    <div class="single-product-wrapper" th:each="product : ${products}">
+                        <div class="product-img">
+                            <img th:src="${product.image}" alt="">
+                            <div class="product-favourite">
+                                <a href="#" class="favme fa fa-heart"></a>
+                            </div>
+                        </div>
+                        <div class="product-description">
+                            <span th:text="${product.category.name}"></span>
+                            <a th:href="@{/menu/{id}(id=${product.id})}">
+                                <h6 th:text="${product.name}"></h6>
+                            </a>
+                            <p class="product-price">
+                                <span th:unless="${product.price_sale == null}" class="old-price" th:text="${product.price}+VNĐ"></span>
+                                <p th:if="${product.price_sale == null}" th:text="${product.price}+VNĐ"></p>
+                                <p th:if="${product.price_sale != null}" th:text="${product.price_sale}+VNĐ"></p>
+                            </p>
+
+                            <p class="product-price" ></p>
+                            <div class="hover-content">
+                                <form th:action="@{/add-to-cart}" method="post" class="d-inline">
+                                    <div class="add-to-cart-btn">
+                                        <input type="hidden" name="id" th:value="${product.getId()}">
+                                        <input type="hidden" name="name" th:value="${product.getName()}">
+                                        <input type="hidden" name="price" th:value="${product.getPrice()}">
+                                        <button type="submit" class="btn essence-btn" onclick="return confirm('Bạn muốn thêm sản phẩm vào giỏ hàng ?')">Thêm vào giỏ hàng</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--Tin Tức-->
+<section class="new_arrivals_area section-padding-80 clearfix">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="section-heading text-center">
+                    <h2>Tin Tức Mới Nhất</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="popular-products-slides owl-carousel owl-theme">
+                    <div class="single-product-wrapper" th:each="neww : ${newws}">
+                        <div class="product-img">
+                            <img th:src="${neww.image}" alt="">
+                            <div class="product-favourite">
+                                <a href="#" class="favme fa fa-heart"></a>
+                            </div>
+                        </div>
+                        <div class="product-description">
+                            <a th:href="@{/news/{id}(id=${neww.id})}">
+                                <h6 th:text="${neww.name}"></h6>
+                            </a>
+                            <span th:text="${neww.description}"></span>
+
+                            <div class="hover-content">
+                                <div class="add-to-cart-btn">
+                                    <a href="#" class="btn essence-btn"  th:href="@{/news/{id}(id=${neww.id})}">Đọc Thêm</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<th:block th:replace="user/layout :: footer"></th:block>
+<th:block th:replace="user/layout :: java-css"></th:block>
+</body>
+</html>

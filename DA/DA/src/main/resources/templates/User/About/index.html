@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  <!-- Title  -->
+  <title>Linh Kiện 24/7</title>
+  <th:block th:replace="user/layout :: link-css"></th:block>
+</head>
+<body>
+<th:block th:replace="user/layout :: header"></th:block>
+<div class="contact-area d-flex align-items-center">
+  <div class="google-map">
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.4205949355232!2d106.78252777577669!3d10.855580057727185!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3175276e7ea103df%3A0xb6cf10bb7d719327!2sThu%20Duc%20Campus%20Hutech%20khu%20E!5e0!3m2!1svi!2s!4v1685891342848!5m2!1svi!2s" width="1500" height="800" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+  </div>
+  <div class="contact-info">
+    <h2>Làm thế nào để tìm thấy chúng tôi?.</h2>
+    <p>Nơi mua bán linh kiện chất lượng và uy tín hàng đầu Việt Nam.</p>
+    <div class="contact-address mt-50">
+      <p><span>Địa Chỉ:</span> Phường Tân Phú, Quận 9, Thành phố Hồ Chí Minh, Việt Nam</p>
+      <p><span>Số Điện Thoại:</span> +84 123 456 789</p>
+      <p><span>Email:</span><a href="mailto:contact@essence.com">linhkien247@gmail.com</a></p>
+    </div>
+  </div>
+</div>
+<th:block th:replace="user/layout :: footer"></th:block>
+<th:block th:replace="user/layout :: java-css"></th:block>
+</body>
+</html>

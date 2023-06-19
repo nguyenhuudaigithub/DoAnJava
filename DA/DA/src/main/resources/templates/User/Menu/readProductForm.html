@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Linh Kiện 24/7</title>
+  <th:block th:replace="user/layout :: link-css"></th:block>
+</head>
+<body>
+<th:block th:replace="user/layout :: header"></th:block>
+<form th:action="@{'/products/' + ${product.id}}" method="product" th:object="${product}">
+  <section class="single_product_details_area d-flex align-items-center">
+    <!-- Single Product Thumb -->
+    <div class="single_product_thumb clearfix">
+      <div class="product_thumbnail_slides owl-carousel">
+        <!-- Loop through productImages and populate the owl items -->
+        <th:block th:each="productImage : ${productImages}">
+          <div class="item">
+            <img class="product-image" th:src="${productImage.image}" alt="Product image" style="width: 100%; height: auto;">
+          </div>
+        </th:block>
+      </div>
+    </div>
+    <!-- Single Product Description -->
+    <div class="single_product_desc clearfix">
+      <span th:text="${product.category.name}"></span>
+      <a href="#">
+        <h2 th:text="${product.name} "></h2>
+      </a>
+      <p class="product-price">
+        <span style="font-size: 15px; font-weight: 600;" th:unless="${product.price_sale == null}" class="old-price" th:text="${product.price}+ VNĐ"></span>
+        <span style="color: red; font-size: 24px; font-weight: 700; text-decoration: none" th:if="${product.price_sale == null}" th:text="${product.price}+ VNĐ"></span>
+        <span style="color: red; font-size: 24px; font-weight: 700;text-decoration: none" th:if="${product.price_sale != null}" th:text="${product.price_sale}+ VNĐ"></span>
+      </p>
+      <p class="product-desc"></p>
+      <p th:text="${product.description}"></p>
+      <!-- Form -->
+      <form class="cart-form clearfix" method="product">
+        <div class="cart-fav-box d-flex align-items-center">
+          <!-- Cart -->
+          <button type="submit" name="addtocart" value="5" class="btn essence-btn">Thêm vào giỏ hàng</button>
+          <!-- Favourite -->
+          <div class="product-favourite ml-4">
+            <a href="#" class="favme fa fa-heart"></a>
+          </div>
+        </div>
+      </form>
+    </div>
+  </section>
+  <div class="single-blog-wrapper">
+    <div class="single-blog-content-wrapper d-flex">
+      <!-- Blog Content -->
+      <div class="single-blog--text">
+        <p th:utext="${product.detail}"></p>
+      </div>
+      <!-- Related Blog Post -->
+      <div class="related-blog-post">
+        <!-- Loop through the list of newws -->
+        <!--<div th:each="news : ${newws}">-->
+        <!--<div class="single-related-blog-post">-->
+        <!--<img th:src="${news.image}" alt="">-->
+        <!--<a th:href="@{/news/{id}(id=${news.id})}">-->
+        <!--<h5 th:text="${news.name}"></h5>-->
+        <!--</a>-->
+        <!--</div>-->
+        <!--</div>-->
+      </div>
+    </div>
+  </div>
+</form>
+<th:block th:replace="user/layout :: footer"></th:block>
+<th:block th:replace="user/layout :: java-css"></th:block>
+</body>
+</html>

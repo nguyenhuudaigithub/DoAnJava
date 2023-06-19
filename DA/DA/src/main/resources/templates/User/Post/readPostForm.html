@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Linh Kiện 24/7</title>
+  <th:block th:replace="user/layout :: link-css"></th:block>
+</head>
+<body>
+<th:block th:replace="user/layout :: header"></th:block>
+<form th:action="@{'/posts/' + ${post.id}}" method="post" th:object="${post}">
+  <div class="single-blog-wrapper">
+    <!-- Single Blog Post Thumb -->
+    <div class="single-blog-post-thumb">
+      <img th:src="${post.image}" alt="" th:field="*{image}">
+    </div>
+    <!-- Single Blog Content Wrap -->
+    <div class="single-blog-content-wrapper d-flex">
+      <!-- Blog Content -->
+      <div class="single-blog--text">
+        <p th:utext="${post.detail}"></p>
+      </div>
+
+      <!-- Related Blog Post -->
+      <div class="related-blog-post">
+        <!-- Loop through the list of posts -->
+        <div th:each="postItem : ${posts}">
+          <div class="single-related-blog-post">
+            <img th:src="${postItem.image}" alt="">
+            <a th:href="@{'/posts/' + ${postItem.id}}">
+              <h5 th:text="${postItem.name}"></h5>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+<th:block th:replace="user/layout :: footer"></th:block>
+<th:block th:replace="user/layout :: java-css"></th:block>
+</body>
+</html>

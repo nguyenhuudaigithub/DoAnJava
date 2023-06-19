@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" class="light-style layout-menu-fixed" dir="ltr" data-theme="theme-default" data-assets-path="../../../../../../userfiles/files/CSS/Admin/assets/" data-template="vertical-menu-template-free" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
+  <title>Chỉnh Sửa Tin Tức</title>
+  <th:block th:replace="admin/layout :: link-css"></th:block>
+</head>
+<body>
+<th:block th:replace="admin/layout :: header"></th:block>
+<div class="layout-page">
+  <!-- Content wrapper -->
+  <div class="content-wrapper">
+    <!-- Content -->
+    <div class="container-xxl flex-grow-1 container-p-y">
+      <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Danh Sách Tin Tức /</span> Chỉnh Sửa Tin Tức</h4>
+      <!-- Basic Bootstrap Table -->
+      <div class="card mb-4">
+        <h5 class="card-header">Chỉnh Sửa Tin Tức</h5>
+        <div class="card-body">
+          <form th:action="@{'/admin/news/edit/' + ${neww.id}}" method="post" th:object="${neww}">
+            <div class="mb-3">
+              <label for="newwName" class="form-label">Tên Tin Tức</label>
+              <input type="text" class="form-control" id="newwName" placeholder="Module ứng dụng" aria-describedby="newwNameHelp" th:field="*{name}" required>
+            </div>
+            <div class="mb-3">
+              <label for="newwDescription" class="form-label">Chi Tiết Tin Tức</label>
+              <input type="text" class="form-control" id="newwDescription" placeholder="Module tăng áp, module hạ áp,..." aria-describedby="newwDescriptionHelp" th:field="*{description}" required>
+            </div>
+            <div class="mb-3">
+              <label for="newwImage" class="form-label">Ảnh đại diện</label>
+              <div class="input-group">
+                <input class="form-control" type="text" placeholder="http://localhost:8080/userfiles/images/Module/OIP%20(10).jpg" id="newwImage" th:field="*{image}">
+                <div class="input-group-append">
+                  <input class="btn btn-outline-secondary" type="button" value="Tải ảnh" onclick="BrowseServer('newwImage');">
+                </div>
+              </div>
+            </div>
+            <div class="mb-3">
+              <div class="">
+                <label class="form-label">Trạng Thái</label>
+              </div>
+              <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                <input type="radio" class="btn-check" name="is_active" id="btnradio1" th:field="*{is_activate}" th:value="true" autocomplete="off">
+                <label class="btn btn-outline-primary" for="btnradio1">Bật</label>
+                <input type="radio" class="btn-check" name="is_active" id="btnradio2" th:field="*{is_activate}" th:value="false" autocomplete="off">
+                <label class="btn btn-outline-primary" for="btnradio2">Tắt</label>
+              </div>
+            </div>
+            <div class="mb-3">
+              <div>
+                <label class="form-label">Hiện Thị Trang Tin Tức</label>
+              </div>
+              <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                <input type="radio" class="btn-check" name="is_home" id="btnradio3" th:field="*{is_page}" th:value="true" autocomplete="off">
+                <label class="btn btn-outline-primary" for="btnradio3">Bật</label>
+                <input type="radio" class="btn-check" name="is_home" id="btnradio4" th:field="*{is_page}" th:value="false" autocomplete="off">
+                <label class="btn btn-outline-primary" for="btnradio4">Tắt</label>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="txtDetail" class="form-label">Chi Tiết Tin Tức</label>
+              <textarea class="form-control" id="txtDetail" name="detail" th:field="*{detail}"></textarea>
+            </div>
+            <button type="submit" class="btn rounded-pill btn-success">Lưu</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<th:block th:replace="admin/layout :: footer"></th:block>
+<th:block th:replace="admin/layout :: java-css"></th:block>
+<script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
+<script>
+    CKEDITOR.replace('txtDetail');
+    function BrowseServer(field) {
+      CKFinder.popup({
+        chooseFiles: true,
+        width: 800,
+        height: 600,
+        onInit: function(finder) {
+          finder.on('files:choose', function(evt) {
+            var file = evt.data.files.first();
+            var url = file.getUrl();
+            document.getElementById(field).value = url;
+          });
+        }
+      });
+    }
+  </script>
+</body>
+</html>

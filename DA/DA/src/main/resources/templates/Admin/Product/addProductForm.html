@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en" class="light-style layout-menu-fixed" dir="ltr" data-theme="theme-default" data-assets-path="../../../../../../userfiles/files/CSS/Admin/assets/" data-template="vertical-menu-template-free" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport"content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
+  <title>Thêm Sản Phẩm</title>
+  <th:block th:replace="admin/layout :: link-css"></th:block>
+</head>
+<body>
+<th:block th:replace="admin/layout :: header"></th:block>
+<div class="layout-page">
+  <!-- Content wrapper -->
+  <div class="content-wrapper">
+    <!-- Content -->
+    <div class="container-xxl flex-grow-1 container-p-y">
+      <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Sản Phẩm /</span> Thêm Sản Phẩm</h4>
+      <!-- Basic Bootstrap Table -->
+      <div class="card mb-4">
+        <h5 class="card-header">Thêm Sản Phẩm</h5>
+        <div class="card-body">
+            <form id="productForm" th:action="@{/admin/products/add}" method="post" enctype="multipart/form-data" th:object="${product}">
+            <div>
+              <label for="categoryName" class="form-label">Tên Sản Phẩm</label>
+              <input type="text" class="form-control" id="categoryName" placeholder="KIT STM32F407VET6 Cortex-M4" aria-describedby="categoryNameHelp" th:field="*{name}" required>
+            </div>
+            <div>
+                <label for="categoryPrice" class="form-label">Giá Sản Phẩm</label>
+                <input type="text" class="form-control" id="categoryPrice" placeholder="350000" aria-describedby="categoryPriceHelp" th:field="*{price}" required>
+            </div>
+            <div>
+                <label for="categoryPriceSale" class="form-label">Giá Giảm Giá </label>
+                <input type="text" class="form-control" id="categoryPriceSale" placeholder="299000" aria-describedby="categoryPriceSaleHelp" th:field="*{price_sale}">
+            </div>   
+            <div>
+                <label for="categoryQuantity" class="form-label">Số Lượng</label>
+                <input type="text" class="form-control" id="categoryQuantity" placeholder="45" aria-describedby="categoryQuantityHelp" th:field="*{quantity}" required>
+              </div>        
+            <div>
+              <label for="categoryDescription" class="form-label">Mô Tả Sản Phẩm</label>
+              <input type="text" class="form-control" id="categoryDescription" placeholder="Khuếch Đại Âm Thanh " aria-describedby="categoryDescriptionHelp" th:field="*{description}" required>
+            </div>
+            <div class="mb-3">
+                <label for="defaultSelect" class="form-label">Danh Mục Sản Phẩm</label>
+                <select id="defaultSelect" class="form-select" name="category.id" th:field="*{category.id}" required>
+                  <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}"></option>
+                </select>
+            </div>         
+            <div class="mb-3">
+              <div class="">
+                <label class="form-label">Trạng Thái</label>
+              </div>
+                <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                    <input type="radio" class="btn-check" name="is_active" id="btnradio1" th:field="*{is_activate}" th:value="true" autocomplete="off">
+                    <label class="btn btn-outline-primary" for="btnradio1">Bật</label>
+                    <input type="radio" class="btn-check" name="is_active" id="btnradio2" th:field="*{is_activate}" th:value="false" autocomplete="off">
+                    <label class="btn btn-outline-primary" for="btnradio2">Tắt</label>
+                </div>
+            </div>
+            <div class="mb-3">
+              <div class="">
+                <label class="form-label">Sản Phẩm Nổi Bật</label>
+              </div>
+              <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                <input type="radio" class="btn-check" name="activate_home" id="btnradio3" th:field="*{is_hot}" th:value="true" autocomplete="off">
+                <label class="btn btn-outline-primary" for="btnradio3">Bật</label>
+                <input type="radio" class="btn-check" name="activate_home" id="btnradio4" th:field="*{is_hot}" th:value="false" autocomplete="off">
+                <label class="btn btn-outline-primary" for="btnradio4">Tắt</label>
+              </div>
+            </div>
+            <div class="mb-3">
+                <label for="categoryDescription" class="form-label">Chi Tiết Sản Phẩm</label>
+                <textarea class="form-control" id="txtDetail" name="detail" th:field="*{detail}"></textarea>
+            </div>                             
+            <div class="mb-3">
+                <div class="col-md-12">
+                    <table class="table table-hover" id="tbAnhSanPham">
+                        <thead>
+                        <tr>
+                            <th class="text-center">#</th>
+                            <th class="text-center">Ảnh</th>
+                            <th class="text-center">Ảnh đại diện</th>
+                            <th class="text-center">Thao tác</th>
+                        </tr>
+                        </thead>
+                        <tbody id="tbHtml">
+                        </tbody>
+                    </table>
+                    <input type="hidden" id="tCurrentId" value="0" />
+                </div>
+            </div>
+            <div class="mb-3 text-center">
+                <button type="button" class="btn rounded-pill btn-outline-secondary" id="browseImageButton">Thêm Mới Ảnh</button>
+              </div>              
+            <div class="mb-3">
+                <button type="submit" class="btn rounded-pill btn-success">Thêm Mới</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<th:block th:replace="admin/layout :: footer"></th:block>
+<th:block th:replace="admin/layout :: java-css"></th:block>
+<script src="/ckfinder/static/ckfinder.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    CKEDITOR.replace('txtDetail');
+
+    $(document).ready(function() {
+        var browseImageButton = document.getElementById("browseImageButton");
+        browseImageButton.onclick = function() {
+            BrowseServer();
+        };
+
+        function BrowseServer() {
+            CKFinder.popup({
+                chooseFiles: true,
+                width: 800,
+                height: 600,
+                onInit: function(finder) {
+                    finder.on('files:choose', function(evt) {
+                        var file = evt.data.files.first();
+                        var url = file.getUrl();
+                        addImageProduct(url);
+                    });
+                }
+            });
+        }
+
+        function addImageProduct(url) {
+            var temp = $('#tCurrentId').val();
+            var currentId = parseInt(temp) + 1;
+            var str = `<tr id="trow_${currentId}">
+                            <td class="text-center">${currentId}</td>
+                            <td class="text-center"><img width="80" src="${url}" /> <input type='hidden' value="${url}" name="images"/></td>
+                            <td class="text-center"><input type="radio" name="rDefault" value="${currentId}"${currentId === 1 ? ' checked="checked"' : ''}/></td>
+                            <td class="text-center"><a href="#" data-id="${currentId}" class="btn btn-sm btn-danger btnXoaAnh">Xóa</a></td>
+                        </tr>`;
+
+            $('#tbHtml').append(str);
+            $('#tCurrentId').val(currentId);
+        }
+    });
+    $('body').on('click', '.btnXoaAnh', function () {
+            var conf = confirm('Bạn có muốn xóa ảnh này không?');
+            if (conf === true) {
+                var _id = $(this).data('id');
+                $('#trow_' + _id).fadeTo('fast', 0.5, function () {
+                    $(this).slideUp('fast', function () { $(this).remove(); });
+                });
+                var temp = $('#tCurrentId').val();
+                var currentId = parseInt(temp) - 1;
+                $('#tCurrentId').val(currentId);
+            }
+    });
+</script>
+
+</body>
+</html>
